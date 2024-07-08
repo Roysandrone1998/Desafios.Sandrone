@@ -2,12 +2,10 @@ const socket = io();
 const role = document.getElementById("role").textContent;
 const email = document.getElementById("email").textContent;
 
-// Escuchar eventos de productos desde el servidor
 socket.on("products", (data) => {
     renderProductos(data);
 });
 
-// Función para renderizar productos en el DOM
 const renderProductos = (productos) => {
     const contenedorProductos = document.getElementById("contenedorProductos");
     contenedorProductos.innerHTML = "";
@@ -37,17 +35,14 @@ const renderProductos = (productos) => {
     });
 }
 
-// Función para eliminar un producto
 const eliminarProducto = (id) => {
     socket.emit("deleteProduct", { id, role });
 }
 
-// Manejar el evento de envío para agregar un producto
 document.getElementById("btnEnviar").addEventListener("click", () => {
     agregarProducto();
 });
 
-// Función para agregar un producto
 const agregarProducto = () => {
     const owner = role === "premium" ? email : "admin";
 

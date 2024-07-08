@@ -56,7 +56,6 @@ class UserRepository {
                 throw new Error('Usuario no encontrado');
             }
 
-            // Verificar si el usuario ha cargado los documentos requeridos
             const requiredDocuments = ['Identificación', 'Comprobante de domicilio', 'Comprobante de estado de cuenta'];
             const userDocuments = user.documents.map(doc => doc.name);
 

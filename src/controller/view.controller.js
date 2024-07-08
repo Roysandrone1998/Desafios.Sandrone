@@ -24,7 +24,7 @@ class ViewsController {
 
             const nuevoArray = productos.map(producto => {
                 const { _id, ...rest } = producto.toObject();
-                return { id: _id, ...rest }; // Agregar el ID al objeto
+                return { id: _id, ...rest }; 
             });
 
 

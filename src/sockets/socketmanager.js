@@ -15,11 +15,9 @@ class SocketManager {
         this.io.on("connection", async (socket) => {
             console.log("Usuario conectado.");
 
-            // Emitir productos al cliente conectado
             const productos = await productRepository.obtenerProductos();
             socket.emit("products", productos.docs);
 
-            // Manejar la eliminación de productos
             socket.on("deleteProduct", async ({ id, role }) => {
                 try {
                     const product = await productRepository.obtenerProductoPorId(id);
@@ -40,13 +38,11 @@ class SocketManager {
                 }
             });
 
-            // Manejar la creación de productos
             socket.on("createProduct", async (producto) => {
                 await productRepository.agregarProducto(producto);
                 this.emitUpdatedProducts(socket);
             });
 
-            // Manejar los mensajes
             socket.on("message", async (data) => {
                 await MessageModel.create(data);
                 const messages = await MessageModel.find();

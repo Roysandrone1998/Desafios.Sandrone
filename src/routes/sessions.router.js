@@ -24,7 +24,6 @@ router.post("/sessionlogin", async (req, res) => {
     }
 })
 
-//Logout
 
 router.get("/logout", (req, res) => {
     if(req.session.login) {
