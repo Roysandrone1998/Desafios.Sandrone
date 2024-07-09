@@ -1,20 +1,16 @@
 const mongoose = require("mongoose");
-const { mongo_url } = require("./config/config");
+const configObject = require("./config/config.js");
+const {mongo_url} = configObject;
 
 class BaseDatos {
     static #instancia; 
-    constructor() {
-        mongoose.connect(mongo_url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-        .then(() => console.log("Conexión exitosa a la base de datos"))
-        .catch(err => console.error("Error de conexión a la base de datos:", err));
+    constructor(){
+        mongoose.connect("mongodb+srv://roysandrone:Coder1@cluster0.ybo821i.mongodb.net/ecomerce?retryWrites=true&w=majority&appName=Cluster0s");
     }
 
     static getInstancia() {
-        if (this.#instancia) {
-            console.log("Conexión previa");
+        if(this.#instancia) {
+            console.log("Conexion previa");
             return this.#instancia;
         }
 
