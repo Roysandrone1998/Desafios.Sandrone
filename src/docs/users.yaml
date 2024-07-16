@@ -1,0 +1,74 @@
+# ./src/docs/user.yaml
+
+openapi: 3.0.1
+info:
+  title: Documentacion de la App Tienda TechZone
+  description: E-commerce
+
+paths:
+  /users:
+    get:
+      summary: Obtiene la lista de usuarios
+      responses:
+        '200':
+          description: Éxito, lista de usuarios obtenida
+
+    post:
+      summary: Crea un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: John
+                last_name:
+                  type: string
+                  example: Doe
+                email:
+                  type: string
+                  format: email
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  example: password123
+                age:
+                  type: integer
+                  example: 30
+                role:
+                  type: string
+                  enum: [admin, usuario, premium]
+                  example: usuario
+                documents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      reference:
+                        type: string
+                cart:
+                  type: string
+                  format: uuid
+                  example: 6108c7c5c9b1f479aef551a0
+      responses:
+        '200':
+          description: Éxito, usuario creado
+
+  /users/{id}:
+    get:
+      summary: Obtiene un usuario por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 6108c7c5c9b1f479aef551a0
+      responses:
+        '200':
+          description: Éxito, usuario encontrado por ID
